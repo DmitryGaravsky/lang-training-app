@@ -1,0 +1,26 @@
+.Pager {
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.PagerButton {
+    text-decoration: none;
+    min-width: 100px;
+    border-radius: 4px;
+    margin: 0;
+    padding: 8px 16px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+.PagerButton:hover {
+    background-color: #f5f5f5;
+    border-color: #c2c2c2;
+    box-shadow: 0px 2px 4px #c2c2c2;
+}
+
+.PagerButton:active {
+    background-color: #c2c2c2;
+}
