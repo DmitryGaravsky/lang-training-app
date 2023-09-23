@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/lang-training-app/static/css/main.880edf1f.css",
+    "main.js": "/lang-training-app/static/js/main.a4bf9e3b.js",
+    "index.html": "/lang-training-app/index.html",
+    "main.880edf1f.css.map": "/lang-training-app/static/css/main.880edf1f.css.map",
+    "main.a4bf9e3b.js.map": "/lang-training-app/static/js/main.a4bf9e3b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.880edf1f.css",
+    "static/js/main.a4bf9e3b.js"
+  ]
+}
