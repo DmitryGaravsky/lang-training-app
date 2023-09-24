@@ -1,15 +1,20 @@
 export default class wordsService {
-    static getWordsWithOptions(sourceWords, targetWords) {
-        const valuesMap = new Map(), 
+    static getWordsWithOptions(sourceWords, targetWords, category) {
+        const valuesMap = new Map(),
             descriptionsMap = new Map()
         targetWords.forEach(x => {
             valuesMap.set(x.key, x.value)
             descriptionsMap.set(x.key, x.description)
         })
+        if (category.startsWith(':'))
+            category = category.substring(1)
+        //
         const words = []
         sourceWords.forEach(x => {
+            if (category !== 'all' && x.category !== category)
+                return
             const options = wordsService.#createOptions(x.key, valuesMap)
-            if(!options)
+            if (!options)
                 return;
             wordsService.#shuffleArray(options)
             words.push({
@@ -23,7 +28,7 @@ export default class wordsService {
     //
     static #createOptions(key, valuesMap) {
         const value = valuesMap.get(key)
-        if(!value)
+        if (!value)
             return null;
         const options = [
             { key: key, value: value, isCorrect: true }

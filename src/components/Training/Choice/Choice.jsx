@@ -1,16 +1,7 @@
 import React, { useState } from 'react'
-import styles from "./Choice.module.css";
 //
-const Item = ({ onClick, classes, children }) => {
-    const className = styles.Item + " " + classes.join(' ')
-    return (
-        <div
-            className={className}
-            onClick={onClick}>
-            {children}
-        </div>
-    )
-}
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
 //
 const Choice = ({ options }) => {
     const [choosenIndex, setChoosenIndex] = useState(-1)
@@ -18,32 +9,36 @@ const Choice = ({ options }) => {
         if (choosenIndex === -1)
             setChoosenIndex(index)
     }
-
-    const getClasses = (index, isCorrect) => {
-        const classes = []
+    // props
+    const getVariant = () => {
         if (choosenIndex === -1)
-            classes.push(styles.Ready)
-        else {
-            if (isCorrect)
-                classes.push(styles.Correct)
-            else
-                classes.push(styles.Incorrect)
-            if (index !== choosenIndex)
-                classes.push(styles.Choosen)
-        }
-        return classes
+            return `outlined`
+        return `contained`
     }
-
+    const getDisabled = (index) => {
+        if (choosenIndex === -1)
+            return false
+        return (index !== choosenIndex)
+    }
+    const getColor = (isCorrect) => {
+        if (choosenIndex === -1)
+            return `primary`
+        return isCorrect ? `success` : `error`
+    }
+    //
     return (
-        <div className={styles.Group}>
+        <Stack direction="row" spacing={1}>
             {options.map((x, index) =>
-                <Item key={x.key}
-                    classes={getClasses(index, x.isCorrect)}
+                <Button
+                    key={x.key}
+                    variant={getVariant()}
+                    color={getColor(x.isCorrect)}
+                    disabled={getDisabled(index)}
                     onClick={() => chooseOnce(index)}>
                     {x.value}
-                </Item>
+                </Button>
             )}
-        </div>
+        </Stack>
     )
 }
 

@@ -1,18 +1,78 @@
+import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
-import styles from "./NavBar.module.css";
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Language } from "@mui/icons-material";
 //
 const NavBar = ({ routes }) => {
+  const [navMenuAnchor, setNavMenuAnchor] = useState(null);
+  const onOpenNavMenu = (event) => {
+    setNavMenuAnchor(event.currentTarget);
+  };
+  const onCloseNavMenu = () => {
+    setNavMenuAnchor(null);
+  };
+  //
   return (
-    <div className={styles.NavBar}>
-      {routes.map(route =>
-        <NavLink
-          className={styles.Link}
-          key={route.path}
-          to={route.path}>
-          {route.name}
-        </NavLink>
-      )}
-    </div>
+    <AppBar position="static">
+      <Toolbar>
+        <Language sx={{ mr: 1, display: { xs: 'none', md: 'flex' } }} />
+        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+          <IconButton
+            size="large"
+            aria-label="navigation menu"
+            aria-controls="menu-appbar"
+            aria-haspopup="true"
+            onClick={onOpenNavMenu}
+            color="inherit"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Menu
+            id="menu-appbar"
+            anchorEl={navMenuAnchor}
+            anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            keepMounted
+            transformOrigin={{ vertical: 'top', horizontal: 'left' }}
+            open={Boolean(navMenuAnchor)}
+            onClose={onCloseNavMenu}
+            sx={{ display: { xs: 'block', md: 'none' } }}
+          >
+            {routes.map((route) => (
+              <MenuItem key={route.path}
+                onClick={onCloseNavMenu}
+                component={NavLink} to={route.path}>
+                <Typography textAlign="center">{route.name}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+          <Button noWrap sx={{ color: 'inherit' }}
+            component={NavLink} to='/'>
+            Lang App
+          </Button>
+        </Box>
+        <Typography noWrap sx={{ color: 'inherit', pr: 4, display: { xs: 'none', md: 'flex' } }}>
+          Lang App
+        </Typography>
+        <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+          {routes.map((route) => (
+            <Button key={route.path}
+              component={NavLink} to={route.path}
+              sx={{ my: 2, color: 'white', display: 'block' }}
+            >
+              {route.name}
+            </Button>
+          ))}
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 

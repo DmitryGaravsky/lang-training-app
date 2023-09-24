@@ -1,41 +1,58 @@
-import React, { useContext, useEffect, useState } from "react";
-import Card from "../components/Training/Card/Card";
-import Pager from "../components/Training/Pager/Pager";
+import React, { useCallback, useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+//
+import WordCard from "../components/Training/WordCard/WordCard";
+import Stack from '@mui/material/Stack';
+import Pagination from '@mui/material/Pagination';
+import PaginationItem from '@mui/material/PaginationItem';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 //
 import { AppDataContext } from "../App";
 import wordsService from "../API/wordsService";
 //
+const pagerArrows = { previous: ArrowBackIcon, next: ArrowForwardIcon };
+//
 const Training = () => {
     const { source, target } = useContext(AppDataContext)
+    const { category } = useParams();
+    //
     const [words, setWords] = useState([])
-    const [pageIndex, setPageIndex] = useState(0)
-    const [limit] = useState(2)
+    const [pageIndex, setPageIndex] = useState(1)
+    const [pagesCount, setPagesCount] = useState(0)
     //
-    const prevPage = (e) => {
-        if (pageIndex > 0)
-            setPageIndex(pageIndex - 1)
-    }
-    const nextPage = (e) => {
-        if ((pageIndex + 1) * limit < words.length)
-            setPageIndex(pageIndex + 1)
-    }
-    const pagerFilter = (index) => {
-        return (index >= pageIndex * limit) && (index < (pageIndex + 1) * limit)
-    }
-    //
+    const limit = 3
     useEffect(() => {
-        setWords(wordsService.getWordsWithOptions(source, target))
-    }, [source, target])
-
+        const wordsWithOptions = wordsService.getWordsWithOptions(source, target, category)
+        setWords(wordsWithOptions)
+        const totalPages = Math.ceil(wordsWithOptions.length / limit)
+        setPagesCount(totalPages)
+    }, [source, target, category])
+    //
+    const pagerFilter = useCallback((index) => {
+        const start = (pageIndex - 1) * limit;
+        return (index >= start) && (index < start + limit)
+    }, [pageIndex])
+    //
     return (
-        <>
+        <Stack sx={{ pt: 2, gap: 2 }}>
             {words
                 .filter((_, index) => pagerFilter(index))
                 .map((word) =>
-                    <Card key={word.key} word={word} />
+                    <WordCard key={word.key} word={word} />
                 )}
-            <Pager nextPage={nextPage} prevPage={prevPage} />
-        </>
+            {(pagesCount > 1) ?
+                <Pagination
+                    shape="rounded" size="large"
+                    sx={{ pt: 2, gap: 2, alignSelf: 'flex-end' }}
+                    count={pagesCount}
+                    onChange={(_, index) => setPageIndex(index)}
+                    renderItem={(item) => (
+                        <PaginationItem {...item} slots={pagerArrows} />
+                    )}
+                /> : <></>
+            }
+        </Stack>
     );
 }
 
