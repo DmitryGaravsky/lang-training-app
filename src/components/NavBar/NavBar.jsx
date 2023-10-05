@@ -53,12 +53,12 @@ const NavBar = ({ routes }) => {
               </MenuItem>
             ))}
           </Menu>
-          <Button noWrap sx={{ color: 'inherit' }}
+          <Button sx={{ color: 'inherit' }}
             component={NavLink} to='/'>
             Lang App
           </Button>
         </Box>
-        <Typography noWrap sx={{ color: 'inherit', pr: 4, display: { xs: 'none', md: 'flex' } }}>
+        <Typography sx={{ color: 'inherit', pr: 4, display: { xs: 'none', md: 'flex' } }}>
           Lang App
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>

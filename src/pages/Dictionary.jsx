@@ -1,34 +1,23 @@
 import React, { useContext } from 'react'
 import { AppDataContext } from '../App'
 //
-import Card from '@mui/material/Card';
 import Stack from '@mui/material/Stack';
-import CardHeader from '@mui/material/CardHeader';
-import CardActions from '@mui/material/CardActions';
-import Button from '@mui/material/Button';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import CategoryCard from '../components/Dictionary/CategoryCard/CategoryCard';
 //
 const Dictionary = () => {
   const { categories } = useContext(AppDataContext)
-
   return (
     <Stack sx={{ pt: 2, gap: 2 }}>
       {categories
         .map((category) =>
-          <Card key={category.key}>
-            <CardHeader sx={{ pb: 0 }}
-              title={category.value}
-              subheader={`Totall words: ${category.count}`}
-            />
-            <CardActions>
-              <Button variant='text' >Add Words</Button>
-              <Button variant='text' >Reset Progress</Button>
-            </CardActions>
-          </Card>
+          <CategoryCard key={category.key} category={category} />
         )}
-      <Fab variant="extended" color="primary" aria-label="add"
-        sx={{ alignSelf: 'flex-end' }}>
+      <Fab sx={{ alignSelf: 'flex-end' }}
+        variant="extended"
+        color="primary"
+        aria-label="add" >
         <AddIcon />Add Category
       </Fab>
     </Stack>

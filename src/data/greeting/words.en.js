@@ -3,13 +3,13 @@ const words_En = [{
     value: 'Hi!',
     transcript: '[haɪ]',
     description: 'Informal greeting.',
-    synonims: 'hi, hello'
+    synonyms: 'hi, hello'
 },{
     key: 'bye',
     value: 'Bye!',
     transcript: '[baɪ]',
     description: 'Informal greeting.',
-    synonims: 'by, good-bye'
+    synonyms: 'by, good-bye'
 }]
 
 export default words_En;

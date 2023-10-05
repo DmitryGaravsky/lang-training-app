@@ -14,6 +14,7 @@ import NavBar from './components/NavBar/NavBar'
 // Data
 import routes from './pages/routes'
 import jsonDataService from "./API/jsonDataService";
+import progressService from "./API/progressService";
 const AppDataContext = createContext(null);
 // Internals
 const Layout = () => {
@@ -40,7 +41,9 @@ const App = () => {
         categories: []
     })
     useEffect(() => {
-        setData(jsonDataService.getData(langPair.sourceLang, langPair.targetLang))
+        const jsonData = jsonDataService.getData(langPair.sourceLang, langPair.targetLang)
+        jsonData.categories.forEach(x => progressService.setTotalCount(x.key, x.count))
+        setData(jsonData)
     }, [langPair])
     //
     return (
