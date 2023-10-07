@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { NavLink } from "react-router-dom";
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -11,7 +13,10 @@ import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Language } from "@mui/icons-material";
 //
-const NavBar = ({ routes }) => {
+const NavBar = ({ routes, langInfo }) => {
+  const toggleLangPair = (event, value) => {
+    langInfo.setValue(value);
+  };
   const [navMenuAnchor, setNavMenuAnchor] = useState(null);
   const onOpenNavMenu = (event) => {
     setNavMenuAnchor(event.currentTarget);
@@ -24,7 +29,7 @@ const NavBar = ({ routes }) => {
     <AppBar position="static">
       <Toolbar>
         <Language sx={{ mr: 1, display: { xs: 'none', md: 'flex' } }} />
-        <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+        <Box sx={{ display: { xs: 'flex', md: 'none' }, flexGrow: 1 }}>
           <IconButton
             size="large"
             aria-label="navigation menu"
@@ -58,7 +63,7 @@ const NavBar = ({ routes }) => {
             Lang App
           </Button>
         </Box>
-        <Typography sx={{ color: 'inherit', pr: 4, display: { xs: 'none', md: 'flex' } }}>
+        <Typography sx={{ color: 'inherit', pr: 4, flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
           Lang App
         </Typography>
         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
@@ -71,6 +76,13 @@ const NavBar = ({ routes }) => {
             </Button>
           ))}
         </Box>
+        <ToggleButtonGroup
+          exclusive variant="outlined" size="small"
+          value={langInfo.value} onChange={toggleLangPair}>
+          {langInfo.values.map((pair) =>
+            <ToggleButton key={pair.key} value={pair}>{pair.name}</ToggleButton>
+          )}
+        </ToggleButtonGroup>
       </Toolbar>
     </AppBar>
   );

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, createContext } from "react";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"
+import { HashRouter, Routes, Route, Outlet } from "react-router-dom"
 // Theme
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -13,14 +13,15 @@ import Dictionary from "./pages/Dictionary";
 import NavBar from './components/NavBar/NavBar'
 // Data
 import routes from './pages/routes'
+import languages from './data/languages.json'
 import jsonDataService from "./API/jsonDataService";
 import progressService from "./API/progressService";
 const AppDataContext = createContext(null);
 // Internals
-const Layout = () => {
+const Layout = ({ langInfo }) => {
     return (
         <>
-            <NavBar routes={routes} />
+            <NavBar routes={routes} langInfo={langInfo} />
             <Container fixed>
                 <Outlet />
             </Container>
@@ -34,7 +35,7 @@ const App = () => {
         return createTheme({ palette: { mode: isDarkMode ? 'dark' : 'light' } })
     }, [isDarkMode]);
     //
-    const [langPair] = useState({ sourceLang: 'es', targetLang: 'en' })
+    const [langPair, setLangPair] = useState(languages.at(0))
     const [data, setData] = useState({
         source: [],
         target: [],
@@ -45,14 +46,20 @@ const App = () => {
         jsonData.categories.forEach(x => progressService.setTotalCount(x.key, x.count))
         setData(jsonData)
     }, [langPair])
+
+    const langInfo = {
+        values: languages,
+        value: langPair,
+        setValue: setLangPair
+    }
     //
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
             <AppDataContext.Provider value={data}>
-                <BrowserRouter>
+                <HashRouter>
                     <Routes>
-                        <Route path='/' element={<Layout />}>
+                        <Route path='/' element={<Layout langInfo={langInfo} />}>
                             <Route index path='' element={<Dashboard />} />
                             <Route path='training/:category' element={<Training />} />
                             <Route path='dict' element={<Dictionary />} />
@@ -60,7 +67,7 @@ const App = () => {
                         </Route>
                         <Route path='*' element={<Dashboard />} />
                     </Routes>
-                </BrowserRouter>
+                </HashRouter>
             </AppDataContext.Provider>
         </ThemeProvider>
     );

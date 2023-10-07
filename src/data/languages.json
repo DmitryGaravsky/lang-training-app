@@ -1,0 +1,20 @@
+[
+    {
+        "key": "es-en",
+        "sourceLang": "es",
+        "targetLang": "en",
+        "name": "Es-En"
+    },
+    {
+        "key": "es-ru",
+        "sourceLang": "es",
+        "targetLang": "ru",
+        "name": "Es-Ru"
+    },
+    {
+        "key": "en-ru",
+        "sourceLang": "en",
+        "targetLang": "ru",
+        "name": "En-Ru"
+    }
+]
