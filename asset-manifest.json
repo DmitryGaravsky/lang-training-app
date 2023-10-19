@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.js": "/lang-training-app/static/js/main.cef56b72.js",
+    "main.js": "/lang-training-app/static/js/main.4aefe72a.js",
     "index.html": "/lang-training-app/index.html",
-    "main.cef56b72.js.map": "/lang-training-app/static/js/main.cef56b72.js.map"
+    "main.4aefe72a.js.map": "/lang-training-app/static/js/main.4aefe72a.js.map"
   },
   "entrypoints": [
-    "static/js/main.cef56b72.js"
+    "static/js/main.4aefe72a.js"
   ]
 }
