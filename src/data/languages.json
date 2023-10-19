@@ -3,18 +3,21 @@
         "key": "es-en",
         "sourceLang": "es",
         "targetLang": "en",
-        "name": "Es-En"
+        "name": "Es-En",
+        "lang": "es-ES"
     },
     {
         "key": "es-ru",
         "sourceLang": "es",
         "targetLang": "ru",
-        "name": "Es-Ru"
+        "name": "Es-Ru",
+        "lang": "es-ES"
     },
     {
         "key": "en-ru",
         "sourceLang": "en",
         "targetLang": "ru",
-        "name": "En-Ru"
+        "name": "En-Ru",
+        "lang": "en-US"
     }
 ]

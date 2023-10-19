@@ -16,6 +16,8 @@ import routes from './pages/routes'
 import languages from './data/languages.json'
 import jsonDataService from "./API/jsonDataService";
 import progressService from "./API/progressService";
+//
+const speechSynthesis = window.speechSynthesis;
 const AppDataContext = createContext(null);
 // Internals
 const Layout = ({ langInfo }) => {
@@ -36,16 +38,27 @@ const App = () => {
     }, [isDarkMode]);
     //
     const [langPair, setLangPair] = useState(languages.at(0))
+    const [voice, setVoice] = useState(null)
     const [data, setData] = useState({
         source: [],
         target: [],
-        categories: []
+        categories: [],
+        voice: null
     })
     useEffect(() => {
+        function prepareVoice(lang) {
+            const voices = speechSynthesis.getVoices();
+            const isTheSameLang = (v) =>
+                lang.localeCompare(v.lang, undefined, { sensitivity: 'accent' }) === 0;
+            const index = voices.findIndex(isTheSameLang);
+            setVoice((index >= 0) ? voices[index] : null)
+        }
+        prepareVoice(langPair.lang)
+        //
         const jsonData = jsonDataService.getData(langPair.sourceLang, langPair.targetLang)
         jsonData.categories.forEach(x => progressService.setTotalCount(x.key, x.count))
-        setData(jsonData)
-    }, [langPair])
+        setData({ ...jsonData, voice: voice })
+    }, [langPair, voice])
 
     const langInfo = {
         values: languages,

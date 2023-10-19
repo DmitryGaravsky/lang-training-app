@@ -9,8 +9,9 @@ import Typography from '@mui/material/Typography';
 import progressService from '../../../API/progressService';
 import Choice from '../Choice/Choice';
 import CircularProgressBox from '../../Progress/Circular';
+import SpeakerButton from '../../Speaker/SpeakerButton';
 //
-const WordCard = ({ word }) => {
+const WordCard = ({ word, voice }) => {
   const [isSomethingChoosen, onSomethingChoosen] = useState(false)
   const [progressIndicator, setProgressIndicator] = useState(null)
   //
@@ -26,6 +27,7 @@ const WordCard = ({ word }) => {
       <CardHeader sx={{ pb: 0 }}
         title={word.value}
         subheader={word.synonyms}
+        avatar={<SpeakerButton text={word.value} voice={voice} />}
         action={progressIndicator}
         titleTypographyProps={{ variant: "h3", color: "primary" }}
         subheaderTypographyProps={{ variant: "h6", color: "secondary" }}

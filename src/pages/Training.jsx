@@ -14,7 +14,7 @@ import wordsService from "../API/wordsService";
 const pagerArrows = { previous: ArrowBackIcon, next: ArrowForwardIcon };
 //
 const Training = () => {
-    const { source, target } = useContext(AppDataContext)
+    const { source, target, voice } = useContext(AppDataContext)
     const { category } = useParams();
     //
     const [words, setWords] = useState([])
@@ -39,7 +39,7 @@ const Training = () => {
             {words
                 .filter((_, index) => pagerFilter(index))
                 .map((word) =>
-                    <WordCard key={word.key} word={word} />
+                    <WordCard key={word.key} word={word} voice={voice} />
                 )}
             {(pagesCount > 1) ?
                 <Pagination
