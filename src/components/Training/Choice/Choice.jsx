@@ -3,31 +3,15 @@ import React, { useState } from 'react'
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 //
-import progressService from "../../../API/progressService"
-//
-const Choice = ({ options, keyword, onChoosen }) => {
+const Choice = ({ word, onComplete }) => {
     const [choosenIndex, setChoosenIndex] = useState(-1)
     const chooseOnce = (index, option) => {
-        if (choosenIndex === -1) {
-            setChoosenIndex(index)
-            if (option.isCorrect)
-                progressService.setCorrect(options.category, keyword)
-            else
-                progressService.setError(options.category, keyword)
-            onChoosen(true)
-        }
+        if (choosenIndex !== -1)
+            return
+        setChoosenIndex(index)
+        onComplete(!option.isCorrect)
     }
     // props
-    const getVariant = () => {
-        if (choosenIndex === -1)
-            return `outlined`
-        return `contained`
-    }
-    const getDisabled = (index) => {
-        if (choosenIndex === -1)
-            return false
-        return (index !== choosenIndex)
-    }
     const getColor = (isCorrect) => {
         if (choosenIndex === -1)
             return `primary`
@@ -36,12 +20,12 @@ const Choice = ({ options, keyword, onChoosen }) => {
     //
     return (
         <Stack direction="row" spacing={1}>
-            {options.map((x, index) =>
+            {word.options.map((x, index) =>
                 <Button
                     key={x.key}
-                    variant={getVariant()}
+                    variant={(choosenIndex === -1) ? `outlined` : `contained`}
                     color={getColor(x.isCorrect)}
-                    disabled={getDisabled(index)}
+                    disabled={(choosenIndex !== -1) && (index !== choosenIndex)}
                     onClick={() => chooseOnce(index, x)}>
                     {x.value}
                 </Button>

@@ -1,33 +1,74 @@
-const words_En = [{
-    key: 'boy',
-    value: 'boy',
-    transcript: '[bɔɪ]',
-    description: 'A male child or young man.',
-    synonyms: 'boy, lad, youngster, houseboy, man-child'
-}, {
-    key: 'girl',
-    value: 'girl',
-    transcript: '[ɡɜːrl]',
-    description: 'A female child.',
-    synonyms: 'girl, lady, maiden, lass, maid, puss'
-}, {
-    key: 'mother',
-    value: 'mother',
-    transcript: '[ˈmʌðə(r)]',
-    description: 'A woman in relation to a child or children to whom she has given birth.',
-    synonyms: 'mother, mom, mum, mama, mamma, mummy'
-}, {
-    key: 'father',
-    value: 'father',
-    transcript: '[ˈfɑːðə(r)]',
-    description: 'A man in relation to his natural child or children.',
-    synonyms: 'father, sire, pater, begetter, governor'
-}, {
-    key: 'family',
-    value: 'family',
-    transcript: '[ˈfæməli]',
-    description: 'A group consisting of parents and children living together in a household.',
-    synonyms: 'family, household, home, colony, kin, house'
-}]
+const words_En = [
+    {
+        key: 'father',
+        value: 'Father',
+        transcript: '[ˈfɑːðər]',
+        description: 'A male parent in a family.',
+        synonyms: 'father, dad, parent',
+    },
+    {
+        key: 'mother',
+        value: 'Mother',
+        transcript: '[ˈmʌðər]',
+        description: 'A female parent in a family.',
+        synonyms: 'mother, mom, parent',
+    },
+    {
+        key: 'son',
+        value: 'Son',
+        transcript: '[sʌn]',
+        description: 'A male child.',
+        synonyms: 'son, boy, child',
+    },
+    {
+        key: 'daughter',
+        value: 'Daughter',
+        transcript: '[ˈdɔːtər]',
+        description: 'A female child.',
+        synonyms: 'daughter, girl, child',
+    },
+    {
+        key: 'brother',
+        value: 'Brother',
+        transcript: '[ˈbrʌðər]',
+        description: 'A male sibling.',
+        synonyms: 'brother, sibling, sibling',
+    },
+    {
+        key: 'sister',
+        value: 'Sister',
+        transcript: '[ˈsɪs.tər]',
+        description: 'A female sibling.',
+        synonyms: 'sister, sibling, sibling',
+    },
+    {
+        key: 'grandfather',
+        value: 'Grandfather',
+        transcript: '[ˈɡrændˌfɑːðər]',
+        description: "The father of one's own parent.",
+        synonyms: 'grandfather, grandpa, grandparent',
+    },
+    {
+        key: 'grandmother',
+        value: 'Grandmother',
+        transcript: '[ˈɡrændˌmʌðər]',
+        description: "The mother of one's own parent.",
+        synonyms: 'grandmother, grandma, grandparent',
+    },
+    {
+        key: 'uncle',
+        value: 'Uncle',
+        transcript: '[ˈʌŋ.kəl]',
+        description: "The brother of one's parent.",
+        synonyms: 'uncle, family member, relative',
+    },
+    {
+        key: 'aunt',
+        value: 'Aunt',
+        transcript: '[ænt]',
+        description: "The sister of one's parent.",
+        synonyms: 'aunt, family member, relative',
+    },
+]
 
 export default words_En;

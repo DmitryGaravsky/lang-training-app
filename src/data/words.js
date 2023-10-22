@@ -1,4 +1,9 @@
 // Predefined words
+import people_category from "./people/category";
+import people_words_en from "./people/words.en";
+import people_words_es from "./people/words.es";
+import people_words_ru from "./people/words.ru";
+//
 import family_category from "./family/category";
 import family_words_en from "./family/words.en";
 import family_words_es from "./family/words.es";
@@ -20,6 +25,12 @@ import products_words_es from "./products/words.es";
 import products_words_ru from "./products/words.ru";
 //
 const PredefinedWords = [
+    {
+        category: people_category,
+        words_en: people_words_en,
+        words_es: people_words_es,
+        words_ru: people_words_ru,
+    },
     {
         category: family_category,
         words_en: family_words_en,
@@ -45,4 +56,4 @@ const PredefinedWords = [
         words_ru: products_words_ru,
     }]
 
-    export default PredefinedWords;
+export default PredefinedWords;

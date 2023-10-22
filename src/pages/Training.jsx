@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 //
-import WordCard from "../components/Training/WordCard/WordCard";
+import TrainingItem from "../components/Training/TrainingItem";
 import Stack from '@mui/material/Stack';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
@@ -39,7 +39,7 @@ const Training = () => {
             {words
                 .filter((_, index) => pagerFilter(index))
                 .map((word) =>
-                    <WordCard key={word.key} word={word} voice={voice} />
+                    <TrainingItem key={word.key} word={word} voice={voice} />
                 )}
             {(pagesCount > 1) ?
                 <Pagination
